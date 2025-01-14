@@ -1,0 +1,18 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .box {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    gap: 100px;
+  }
+  .titleClass {
+    font-size: 40px;
+    font-weight: 600;
+  }
+}
