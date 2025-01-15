@@ -1,0 +1,16 @@
+.logo {
+  /* 设置背景图像 */
+  background-image: url("/images/logo.png"),
+    linear-gradient(to bottom, rgba(155, 54, 54, 0.5), rgba(67, 180, 32, 0.5));
+
+  /* 确保图像和渐变都填充整个元素 */
+  background-size: contain;
+
+  /* 调整图像和渐变的位置 */
+  background-position: center, center;
+  width: 450px;
+  height: 100px;
+  background-repeat: no-repeat;
+
+  /* 确保图像和渐变都随元素大小变化而调整 */
+}

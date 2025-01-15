@@ -35,7 +35,9 @@ const Layout = ({ children }) => {
     <div className={styles.layout}>
       <header className={styles.header}>
         <div className={styles.headerBox}>
-          <div className={styles.titleClass}>网易云音乐</div>
+          <div className={styles.titleClass}>
+            <img src="/images/topbar.png" alt="topbar" className={styles.topbarImg} />
+          </div>
           <nav className={styles.nav}>
             <div
               className={`${styles.navItem} ${
@@ -149,6 +151,9 @@ const Layout = ({ children }) => {
               </div>
               <div>
                 <p>歌手</p>
+              </div>
+              <div>
+                <p>新碟上架</p>
               </div>
             </div>
           ) : (
