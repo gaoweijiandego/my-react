@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
       <header className={styles.header}>
         <div className={styles.headerBox}>
           <div className={styles.titleClass}>
-            <img src="/images/topbar.png" alt="topbar" className={styles.topbarImg} />
+            {/* <img src="/images/topbar.png" alt="topbar" className={styles.topbarImg} /> */}
           </div>
           <nav className={styles.nav}>
             <div
