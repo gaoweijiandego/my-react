@@ -2,7 +2,6 @@ import styles from "@/styles/index/index.module.scss";
 import { Swiper } from "tdesign-react/lib/";
 import { useEffect, useState, useRef } from "react";
 import MainOne from "./components/mainOne";
-
 const { SwiperItem } = Swiper;
 export async function getStaticProps() {
   let data;
