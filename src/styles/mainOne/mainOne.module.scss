@@ -76,6 +76,7 @@
     
     }
     .mainOneLeftPictureItem {
+    
       width: 140px;
       height: 140px;
       position: relative;
@@ -84,6 +85,7 @@
       img {
         width: 100%;
         height: 100%;
+        cursor: pointer;
       }
       .mainOneLeftPictureBottomContainer {
         position: absolute;
@@ -146,6 +148,7 @@
         height: 92px;
         transform: scale(0.97);
         background: no-repeat center/cover url("/images/dis_vip_card.png");
+        cursor: pointer;
       }
       .mainOneRightContentItem {
         height: 122px;
@@ -201,14 +204,66 @@
         }
       }
       .mainOneRightSingerContentMain {
-        width: 100%;
-        height: 316px;
+        // width: 100%;
+        // height: 316px;
         margin: 6px 0 14px 20px;
+        .mainOneRightSingerContentMainContainer{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          background-color: #fafafa;
+          width: 210px;
+          margin-top: 14px;
+          height: 62px;
+          border: 1px solid #d3d3d3;
+          cursor: pointer;
+          &:hover{
+            background-color: #f4f4f4;
+          }
+          .mainOneRightSingerContentMainItemImg{
+            width: 62px;
+            height: 62px;
+            background-size: cover;
+            background-position: center;
+          }
+          .mainOneRightSingerContentMainItemTextContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 133px;
+            height: 60px;
+            padding-left: 14px;
+            .mainOneRightSingerContentMainItemTextTop{
+              font-size: 14px;
+              color: #333;
+              font-weight: 700;
+            }
+            .mainOneRightSingerContentMainItemTextBottom{
+              font-size: 12px;
+              color: #666;
+              margin-top: 4px;
+            }
+          }
+        }
       }
       .mainOneRightSingerContentFooter {
-        width: 100%;
+        width: 210px;
         height: 139px;
-        margin-left: 20px;
+       
+        .mainOneRightSingerContentFooterButton{
+          margin-left: 20px;
+          width: 210px;
+          height: 30px;
+          font-size: 12px;
+          color: #333;
+          font-weight: 700;
+          background-color: #fafafa;
+          border-radius: 4px;
+          &:hover{
+            background-color: #fff;
+            border: 1px solid #d3d3d3;
+          }
+        }
       }
     }
   }

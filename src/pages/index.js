@@ -4,22 +4,54 @@ import { useEffect, useState, useRef } from "react";
 import MainOne from "./components/mainOne";
 const { SwiperItem } = Swiper;
 export async function getStaticProps() {
-  let data;
-  // 模拟获取数据
-  await fetch("http://localhost:3000/api/home")
-    .then((res) => res.json())
-    .then((res) => {
-      data = res;
-    });
+  try {
+    // 并行请求多个接口
+    const [singer, data] = await Promise.all([
+      fetch("http://localhost:3000/api/singer"),
+      fetch("http://localhost:3000/api/home"),
+    ]);
+    console.log(singer, data, "data");
+    // 检查响应是否成功
+    if (!singer.ok || !data.ok) {
+      throw new Error("Network response was not ok");
+    }
 
-  return {
-    props: {
-      data: data, // 将数据传递给页面组件
-    },
-  };
+    // 解析 JSON 数据
+    const singerData = await singer.json();
+    const dataData = await data.json();
+
+    return {
+      props: {
+        singers: singerData, // 将歌手数据传递给页面组件
+        data: dataData, // 将专辑数据传递给页面组件
+      },
+    };
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return {
+      props: {
+        singers: [], // 如果请求失败，返回空数组
+        data: [],
+      },
+    };
+  }
+
+  // let data;
+  // // 模拟获取数据
+  // await fetch("http://localhost:3000/api/home")
+  //   .then((res) => res.json())
+  //   .then((res) => {
+  //     data = res;
+  //   });
+
+  // return {
+  //   props: {
+  //     data: data, // 将数据传递给页面组件
+  //   },
+  // };
 }
 
-export default function Home({ data }) {
+export default function Home({ singers, data }) {
   const [gradientColors, setGradientColors] = useState({
     color1: "hsla(180, 50%, 80%, 0.6)",
     color2: "hsla(190, 50%, 80%, 0.5)",
@@ -101,9 +133,7 @@ export default function Home({ data }) {
         <Swiper
           className={styles.swiper}
           onChange={(swiper) => {
-     
             if (data && data[swiper]) {
-              
               const currentImage = data[swiper];
               getImageColors(currentImage.data).then((colors) => {
                 console.log(colors);
@@ -129,7 +159,7 @@ export default function Home({ data }) {
           </p>
         </div>
       </div>
-      <MainOne />
+      <MainOne data={singers} />
     </div>
   );
 }

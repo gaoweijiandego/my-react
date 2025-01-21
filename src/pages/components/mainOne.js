@@ -2,32 +2,16 @@ import styles from "@/styles/mainOne/mainOne.module.scss";
 import { Button } from "tdesign-react/lib/";
 import { Icon } from "tdesign-icons-react";
 import { useEffect, useState } from "react";
-export async function getStaticProps() {
-  let data;
-  // 模拟获取数据
-  await fetch("http://localhost:3000/api/mainOne")
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res);
-      data = res;
-    });
-
-  return {
-    props: {
-      data: data, // 将数据传递给页面组件
-    },
-  };
-}
 
 export default function MainOne({ data }) {
   const [singerData, setSingerData] = useState([]);
   useEffect(() => {
-    // const filterSinger=['张惠妹','李荣浩','杨丞琳','华晨宇','周杰伦']
-    // const filterData=data.filter((item)=>{
-    //   return filterSinger.includes(item.name)
-    // })
-    // setSingerData(filterData);
-    console.log(data);
+    const filterSinger = ["张惠妹", "吴莫愁", "孙楠", "陈楚生", "麦田老狼"];
+    const tmpData = Object.values(data)[0];
+    const filterData = tmpData.filter((item) => {
+      return filterSinger.includes(item.name);
+    });
+    setSingerData(filterData);
   }, [data]);
   const PictureSrc = [
     {
@@ -150,8 +134,39 @@ export default function MainOne({ data }) {
               />
             </p>
           </div>
-          <div className={styles.mainOneRightSingerContentMain}></div>
-          <div className={styles.mainOneRightSingerContentFooter}></div>
+          <div className={styles.mainOneRightSingerContentMain}>
+            {singerData.map((item, index) => {
+              return (
+                <div
+                  className={styles.mainOneRightSingerContentMainContainer}
+                  key={index}
+                >
+                  <img src={item.url} alt="" className={styles.mainOneRightSingerContentMainItemImg} />
+                  <div
+                    className={
+                      styles.mainOneRightSingerContentMainItemTextContainer
+                    }
+                  >
+                    <div
+                      className={styles.mainOneRightSingerContentMainItemTextTop}
+                    >
+                      {item.name}
+                    </div>
+                    <div
+                      className={styles.mainOneRightSingerContentMainItemTextBottom}
+                    >
+                      {item.describe}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className={styles.mainOneRightSingerContentFooter}>
+            <Button variant="outline" theme="default" className={styles.mainOneRightSingerContentFooterButton}>
+              申请成为网易音乐人
+            </Button>
+          </div>
         </div>
       </div>
     </div>
