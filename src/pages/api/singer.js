@@ -64,6 +64,59 @@ export default function handler(req, res) {
             url: "/images/hcy.jpg",
           },
         ],
+        disc:[
+          {
+            title:'春龙交响夜2024',
+            singers:'罗大佑  /  春龙交响乐团',
+            url: "/images/discSwiper/109951170376917434.jpg",
+          },
+          {
+            title: "WINTER HEPTAGON",
+            singers: "GOT7",
+            url: "/images/discSwiper/109951170406711224.jpg",
+          },
+          {
+            title: "Balloonerism",
+            singers: "Mac Miller",
+            url: "/images/discSwiper/109951170376564077.jpg",
+          },
+          {
+            title: "量变临界点",
+            singers: "华晨宇",
+            url: "/images/discSwiper/109951170340533586.jpg",
+          },
+          {
+            title: "Walkerworld 2.0",
+            singers: "Alan Walker",
+            url: "/images/discSwiper/109951170362572621.jpg",
+          },
+          {
+            title: "趁记忆消失之前 Before the memories Fade [Acoustic Live Session]",
+            singers: "陈珊妮",
+            url: "/images/discSwiper/109951170312637354.jpg",
+          },
+          {
+            title: "背面是我",
+            singers: "丁世光",
+            url: "/images/discSwiper/109951170302919617.jpg",
+          },
+          {
+            title: "珍珠刑",
+            singers: "魏如萱",
+            url: "/images/discSwiper/109951170300270996.jpg",
+          },
+          {
+            title: "赛浪20",
+            singers: "海龟先生",
+            url: "/images/discSwiper/109951170280967507.jpg",
+          },{
+            title: "Deus Ex Machina",
+            singers: "珂拉琪 Collage",
+            url: "/images/discSwiper/109951170261863766.jpg",
+          }
+          
+
+        ],
       });
 
       break;

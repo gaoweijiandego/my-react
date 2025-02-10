@@ -141,6 +141,7 @@ export default function Home({ singers, data }) {
               });
             }
           }}
+          autoplay={true}
           navigation={{ placement: "inside", type: "dots" }}
         >
           {data.map((item, index) => (

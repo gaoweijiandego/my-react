@@ -4,6 +4,9 @@
   // transform: translateX(1px);
   //   width: 1222px;
   height: 100%;
+  width: 100%;
+  justify-content: center;
+  background-color: #f5f5f5;
   .mainOneLeft {
     width: 731px;
 
@@ -13,6 +16,8 @@
     flex-direction: column;
     align-items: center;
     padding: 20px 0px 40px;
+    background-color: #fff;
+    // 热门推荐
     .mainOneLeftNav {
       width: 689px;
       border-bottom: 2px solid #c10d0c;
@@ -68,71 +73,420 @@
         margin-bottom: -2px;
       }
     }
+    // 歌单推荐
     .mainOneLeftPictureContainer {
       margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 42px;
-    
-    }
-    .mainOneLeftPictureItem {
-    
-      width: 140px;
-      height: 140px;
-      position: relative;
-      border: 1px solid #ccc;
-      margin-bottom: 30px;
-      img {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-      }
-      .mainOneLeftPictureBottomContainer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 27px;
-        background-color: #000;
-        opacity: 0.4;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .mainOneLeftPictureBottomContainerIcon {
-          width: 14px;
-          height: 14px;
-          color: #ccc;
-          margin-left: 10px;
+      margin-bottom: 40px;
+      .mainOneLeftPictureItem {
+        width: 140px;
+        height: 140px;
+        position: relative;
+        border: 1px solid #ccc;
+        margin-bottom: 30px;
+        img {
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
         }
-        .mainOneLeftPictureBottomContainerText {
-          color: #ccc;
-          font-size: 12px;
-          margin-left: 4px;
-          flex: 1;
+        .mainOneLeftPictureBottomContainer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 27px;
+          background-color: #000;
+          opacity: 0.4;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .mainOneLeftPictureBottomContainerIcon {
+            width: 14px;
+            height: 14px;
+            color: #ccc;
+            margin-left: 10px;
+          }
+          .mainOneLeftPictureBottomContainerText {
+            color: #ccc;
+            font-size: 12px;
+            margin-left: 4px;
+            flex: 1;
+          }
+          .mainOneLeftPictureBottomContainerIconRight {
+            color: #ccc;
+            font-size: 20px;
+            margin-right: 10px;
+            &:hover {
+              cursor: pointer;
+              color: #fff;
+            }
+          }
         }
-        .mainOneLeftPictureBottomContainerIconRight {
-          color: #ccc;
-          font-size: 20px;
-          margin-right: 10px;
+        .mainOneLeftPictureBottomText {
+          font-size: 14px;
+          margin-top: 4px;
           &:hover {
             cursor: pointer;
-            color: #fff;
-           
+            text-decoration: underline;
           }
         }
       }
-      .mainOneLeftPictureBottomText {
-        font-size: 14px;
-        margin-top: 4px;
-        &:hover {
+    }
+    // 新碟上架
+    .mainOneLeftDisc {
+      margin-top: 55px;
+      width: 689px;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .mainOneLeftDiscTitleContainer {
+        border-bottom: 2px solid #c10d0c;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        .mainOneLeftDiscTitleLeft {
+          display: flex;
+          align-items: center;
+          .mainOneLeftDiscTitleCircle {
+            height: 14px;
+            width: 14px;
+            margin: 10px;
+            border-radius: 50%;
+            border: 4px solid #c10d0c; // 圆的边框颜色和宽度
+            background-color: transparent; // 中心空白
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .mainOneLeftDiscTitleText {
+            font-size: 20px;
+            line-height: 28px;
+            cursor: pointer;
+          }
+        }
+        .mainOneLeftDiscTitleRight {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          color: #666;
           cursor: pointer;
-          text-decoration: underline;
+          .mainOneLeftDiscTitleRightIcon {
+            color: #c10d0c;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-left: 2px;
+            margin-bottom: -2px;
+          }
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      // 新碟上架内容
+      .mainOneLeftDiscContent {
+        width: 100%;
+        height: 186px;
+        background-color: #f5f5f5;
+        margin: 20px 0 37px;
+        border: 1px solid #d3d3d3;
+        .swiper {
+          :global(.t-swiper__arrow-left) {
+            width: 23px;
+            height: 23px;
+            color: #666;
+            left: 2px;
+            top: 84px;
+            // transform: translateY(-50%);
+            :global(.t-icon) {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          :global(.t-swiper__arrow-right) {
+            width: 23px;
+            height: 23px;
+            top: 84px;
+            right: 4px;
+            color: #666;
+            :global(.t-icon) {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          :global(.t-swiper__container__item) {
+            display: flex;
+            height: 180px;
+
+            // justify-content: center;
+            padding-left: 18px;
+          }
+          .swiperItemContainer {
+            margin-left: 11px;
+            margin-top: 28px;
+            width: 118px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+
+            .backGroundImg {
+              width: 118px;
+              height: 100px;
+
+              background: url("/images/coverall.png") no-repeat;
+              background-position: 12px -570px;
+              background-size: 190px 862px;
+              .swiperItemTextContainerImg {
+                width: 100px;
+                height: 100px;
+              }
+              .swiperItemTextContainerTitle {
+                font-size: 12px;
+                color: #000;
+                line-height: 18px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+              .swiperItemTextContainerText {
+                font-size: 12px;
+                color: #666;
+                line-height: 18px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+    // 榜单
+    .mainOneLeftRank {
+      width: 689px;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .mainOneLeftRankTitleContainer {
+        border-bottom: 2px solid #c10d0c;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        .mainOneLeftRankTitleLeft {
+          display: flex;
+          align-items: center;
+          .mainOneLeftRankTitleCircle {
+            height: 14px;
+            width: 14px;
+            margin: 10px;
+            border-radius: 50%;
+            border: 4px solid #c10d0c; // 圆的边框颜色和宽度
+            background-color: transparent; // 中心空白
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .mainOneLeftRankTitleText {
+            font-size: 20px;
+            line-height: 28px;
+            cursor: pointer;
+          }
+        }
+        .mainOneLeftRankTitleRight {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          color: #666;
+          cursor: pointer;
+          .mainOneLeftRankTitleRightIcon {
+            color: #c10d0c;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-left: 2px;
+            margin-bottom: -2px;
+          }
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      // 榜单内容
+      .mainOneLeftRankContent {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 20px;
+        background-color: #f4f4f4;
+        .mainOneLeftRankContentLeft {
+          width: 230px;
+          height: 472px;
+          border-top: 1px solid #d3d3d3;
+          border-bottom: 1px solid #d3d3d3;
+          border-left: 1px solid #d3d3d3;
+          .mainOneLeftRankContentLeftImageContainer {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 7px;
+            .mainOneLeftRankContentLeftImageBox {
+              width: 196px;
+              height: 80px;
+              display: flex;
+              .mainOneLeftRankContentLeftImageBoxImg {
+                width: 80px;
+                height: 80px;
+                box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+              }
+              .mainOneLeftRankContentLeftImageBoxText {
+                display: flex;
+                flex-direction: column;
+                margin: 6px 0 0 10px;
+                width: 116px;
+                .mainOneLeftRankContentLeftImageBoxTextTitle {
+                  font-size: 14px;
+                  color: #333;
+                  font-weight: 700;
+                  line-height: 19px;
+                  margin-bottom: 8px;
+                  cursor: pointer;
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+                .mainOneLeftRankContentLeftImageBoxTextIconContainer {
+                  display: flex;
+                  flex-direction: row;
+                  margin-left: -1px;
+                  cursor: pointer;
+                  .mainOneLeftRankContentLeftImageBoxTextIcon {
+                    font-size: 24px;
+                    color: #c6c6c6;
+                    &:nth-child(2) {
+                      margin-left: 8px;
+                    }
+                    &:hover {
+                      color: #a2a2a2;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .mainOneLeftRankContentLeftList {
+            .mainOneLeftRankContentLeftItem {
+              padding-left: 15px;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              height: 32px;
+              width: 100%;
+              position: relative;
+              &:nth-child(2n + 1) {
+                background-color: #e8e8e8;
+              }
+              &:nth-child(1) {
+                div:first-child {
+                  color: #c10d0c;
+                }
+              }
+              &:nth-child(2) {
+                div:first-child {
+                  color: #c10d0c;
+                }
+              }
+              &:nth-child(3) {
+                div:first-child {
+                  color: #c10d0c;
+                }
+              }
+              .mainOneLeftRankContentLeftItemIndex {
+                width: 35px;
+                height: 32px;
+                text-align: center;
+                line-height: 32px;
+              }
+              .mainOneLeftRankContentLeftItemName {
+                font-size: 12px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 170px;
+
+                cursor: pointer;
+                overflow: hidden;
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+
+              .mainOneLeftRankContentLeftItemIconContainer {
+                display: none;
+                
+              }
+              &:hover {
+                .mainOneLeftRankContentLeftItemName {
+                  max-width: 90px;
+                }
+                .mainOneLeftRankContentLeftItemIconContainer {
+                  flex: 1;
+                  display: flex;
+                  justify-content: end;
+                  cursor: pointer;
+                  margin-right: 10px;
+
+                  .mainOneLeftRankContentLeftImageBoxTextIcon {
+                    font-size: 20px;
+                    margin-right: 4px;
+                    color: #666666;
+                    &:hover {
+                      color: #333;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .mainOneLeftRankContentLeftItemMore {
+            background-color: #e8e8e8;
+            height: 32px;
+            text-align: right;
+            line-height: 32px;
+            font-size: 12px;
+            padding-right: 30px;
+            cursor: pointer;
+            &:hover{
+              text-decoration: underline;
+            }
+          }
+        }
+        .mainOneLeftRankContentCenter {
+          width: 230px;
+          height: 472px;
+          border-top: 1px solid #d3d3d3;
+          border-bottom: 1px solid #d3d3d3;
+          border-left: 1px solid #d3d3d3;
+        }
+        .mainOneLeftRankContentRight {
+          width: 230px;
+          height: 472px;
+          border: 1px solid #d3d3d3;
         }
       }
     }
   }
   .mainOneRight {
+    background-color: #fff;
     width: 252px;
     border-right: 1px solid #d3d3d3;
+    // 登录
     .mainOneRightLoginContent {
       position: relative;
       background: no-repeat url("/images/index.png");
@@ -140,7 +494,7 @@
       background-position: 0px -896px;
       background-size: 522px 1140px;
       box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2);
-      padding:4px 0 0 0;
+      padding: 4px 0 0 0;
       .mainOneRightContentItemBackground {
         background-color: #fff;
         margin: 0;
@@ -157,7 +511,6 @@
         align-items: center;
 
         .mainOneRightContentItemText {
-        
           font-size: 12px;
           color: #666;
           display: flex;
@@ -174,6 +527,7 @@
         }
       }
     }
+    // 入驻歌手
     .mainOneRightSingerContent {
       margin-top: 15px;
       width: 100%;
@@ -207,7 +561,7 @@
         // width: 100%;
         // height: 316px;
         margin: 6px 0 14px 20px;
-        .mainOneRightSingerContentMainContainer{
+        .mainOneRightSingerContentMainContainer {
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -217,28 +571,29 @@
           height: 62px;
           border: 1px solid #d3d3d3;
           cursor: pointer;
-          &:hover{
+          &:hover {
             background-color: #f4f4f4;
           }
-          .mainOneRightSingerContentMainItemImg{
+          .mainOneRightSingerContentMainItemImg {
             width: 62px;
             height: 62px;
             background-size: cover;
             background-position: center;
           }
-          .mainOneRightSingerContentMainItemTextContainer{
+          .mainOneRightSingerContentMainItemTextContainer {
             display: flex;
             flex-direction: column;
             justify-content: center;
             width: 133px;
             height: 60px;
             padding-left: 14px;
-            .mainOneRightSingerContentMainItemTextTop{
+            .mainOneRightSingerContentMainItemTextTop {
               font-size: 14px;
               color: #333;
               font-weight: 700;
+              
             }
-            .mainOneRightSingerContentMainItemTextBottom{
+            .mainOneRightSingerContentMainItemTextBottom {
               font-size: 12px;
               color: #666;
               margin-top: 4px;
@@ -247,21 +602,79 @@
         }
       }
       .mainOneRightSingerContentFooter {
-        width: 210px;
-        height: 139px;
-       
-        .mainOneRightSingerContentFooterButton{
+        .mainOneRightSingerContentFooterButton {
           margin-left: 20px;
           width: 210px;
-          height: 30px;
+          height: 31px;
           font-size: 12px;
           color: #333;
           font-weight: 700;
           background-color: #fafafa;
           border-radius: 4px;
-          &:hover{
+          &:hover {
             background-color: #fff;
             border: 1px solid #d3d3d3;
+          }
+        }
+      }
+    }
+    // 热门主播
+    .mainOneRightAnchorContent {
+      margin-top: 30px;
+      width: 100%;
+      .mainOneRightAnchorContentTitle {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px;
+        border-bottom: 1px solid #ccc;
+        height: 23px;
+        color: #333;
+        font-size: 12px;
+        .mainOneRightAnchorContentTitleLeft {
+          font-weight: 700;
+        }
+      }
+      .mainOneRightAnchorContentMain {
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+        margin-top: 20px;
+        .mainOneRightAnchorContentMainItem {
+          display: flex;
+          flex-direction: row;
+          width: 210px;
+          height: 50px;
+
+          .mainOneRightAnchorContentMainItemImg {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+          }
+          .mainOneRightAnchorContentMainItemText {
+            display: flex;
+            flex-direction: column;
+
+            padding-left: 14px;
+            .mainOneRightAnchorContentMainItemTextName {
+              font-size: 12px;
+              color: #000;
+              font-weight: 500;
+              line-height: 21px;
+              cursor: pointer;
+              &:hover{
+                text-decoration: underline;
+              }
+            }
+            .mainOneRightAnchorContentMainItemTextDescribe {
+              width: 160px;
+              font-size: 12px;
+              color: #666;
+              line-height: 21px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
           }
         }
       }

@@ -163,7 +163,60 @@ const Layout = ({ children }) => {
       </header>
       <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>
-        <p>© 2025 我的网易云</p>
+        <div className={styles.footerBox}>
+          <div className={styles.footerTopContainer}>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgOne} />
+              <p className={styles.footerTopItemTextOne}>音乐开放平台</p>
+            </div>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgTwo} />
+              <p className={styles.footerTopItemTextOne}>云村交易所</p>
+            </div>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgThree} />
+              <p className={styles.footerTopItemTextOne}>X StudioAI歌手</p>
+            </div>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgFour} />
+              <p className={styles.footerTopItemTextOne}>用户认证</p>
+            </div>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgFive} />
+              <p className={styles.footerTopItemTextOne}>AI 免费写歌</p>
+            </div>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgSix} />
+              <p className={styles.footerTopItemTextOne}>云推歌</p>
+            </div>
+            <div className={styles.footerTopItem}>
+              <a className={styles.footerTopItemImgSeven} />
+              <p className={styles.footerTopItemTextOne}>赞赏</p>
+            </div>
+          </div>
+          <div className={styles.footerBottomContainer}>
+            <div className={styles.footerLinks}>
+              <a href="#">服务条款</a>
+              <span className={styles.line}>|</span>
+              <a href="#">隐私政策</a>
+              <span className={styles.line}>|</span>
+              <a href="#">儿童隐私政策</a>
+              <span className={styles.line}>|</span>
+              <a href="#">版权投诉</a>
+              <span className={styles.line}>|</span>
+              <a href="#">投资者关系</a>
+              <span className={styles.line}>|</span>
+              <a href="#">广告合作</a>
+              <span className={styles.line}>|</span>
+              <a href="#">联系我们</a>
+            </div>
+            <div className={styles.footerInfo}>
+              <p><span style={{ marginRight:14+'px'}}>廉正举报</span><span style={{ marginRight:14+'px'}}>不良信息举报邮箱: 51jubao@service.netease.com</span>客服热线：95163298</p>
+              <p>互联网宗教信息服务许可证：浙（2022）0000120 增值电信业务经营许可证：浙B2-20150198 粤B2-20090191-18 工业和信息化部备案管理系统网站</p>
+              <p><span style={{ marginRight:14+'px'}}>网易公司版权所有©1997-2025</span>杭州乐读科技有限公司运营：浙网文[2024]0900-042号 <img src="/images/police.png" alt="police" className={styles.policeIcon} style={{ marginRight:14+'px'}} /> 浙公网安备 33010802013307号 算法服务公示信息</p>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
