@@ -1,8 +1,10 @@
 import styles from "@/styles/Layout/Layout.module.scss";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Input, Button } from "tdesign-react/lib/";
+import { Input, Button, Slider } from "tdesign-react/lib/";
 import { Icon } from "tdesign-icons-react";
+import { useMusicPlayer } from '@/context/MusicContext';
+
 const Layout = ({ children }) => {
   const router = useRouter();
 
@@ -14,6 +16,34 @@ const Layout = ({ children }) => {
   const handleSearch = () => {
     console.log("搜索内容:", searchValue);
   };
+  const [isPlayerVisible, setIsPlayerVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsPlayerVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPlayerVisible(false);
+  };
+  
+  const {
+    currentTime,
+    totalTime,
+    progress,
+    currentSong,
+    isPlaying,
+    setCurrentSong,
+    togglePlay,
+    seekTo
+  } = useMusicPlayer();
+
+  // 添加格式化时间的辅助函数
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
   useEffect(() => {
     if (activeIndex === 0) {
       router.push("/");
@@ -31,6 +61,47 @@ const Layout = ({ children }) => {
       router.push("/download");
     }
   }, [activeIndex]);
+
+  useEffect(() => {
+    // 使用节流函数来限制事件处理的频率
+    const throttle = (func, limit) => {
+      let inThrottle;
+      return function (...args) {
+        if (!inThrottle) {
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    };
+
+    const handleMouseMove = throttle((event) => {
+      const windowHeight = window.innerHeight;
+      const mouseY = event.clientY;
+      setIsPlayerVisible(mouseY > windowHeight - 150);
+    }, 300); // 每100ms最多执行一次
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  // 处理进度条改变
+  const handleSliderChange = (newValue) => {
+    const newTime = seekTo(newValue);
+    // 这里可以调用音频播放器的seek方法
+  };
+
+  // 播放音乐示例
+  const handlePlayClick = () => {
+    // 使用一个测试音频URL
+    const songUrl = "/music/yzgf.mp3";
+    setCurrentSong({url:songUrl,name:'远走高飞',singer:'高志远',album:'歌单'});
+    togglePlay();
+  };
+
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
@@ -211,13 +282,94 @@ const Layout = ({ children }) => {
               <a href="#">联系我们</a>
             </div>
             <div className={styles.footerInfo}>
-              <p><span style={{ marginRight:14+'px'}}>廉正举报</span><span style={{ marginRight:14+'px'}}>不良信息举报邮箱: 51jubao@service.netease.com</span>客服热线：95163298</p>
-              <p>互联网宗教信息服务许可证：浙（2022）0000120 增值电信业务经营许可证：浙B2-20150198 粤B2-20090191-18 工业和信息化部备案管理系统网站</p>
-              <p><span style={{ marginRight:14+'px'}}>网易公司版权所有©1997-2025</span>杭州乐读科技有限公司运营：浙网文[2024]0900-042号 <img src="/images/police.png" alt="police" className={styles.policeIcon} style={{ marginRight:14+'px'}} /> 浙公网安备 33010802013307号 算法服务公示信息</p>
+              <p>
+                <span style={{ marginRight: 14 + "px" }}>廉正举报</span>
+                <span style={{ marginRight: 14 + "px" }}>
+                  不良信息举报邮箱: 51jubao@service.netease.com
+                </span>
+                客服热线：95163298
+              </p>
+              <p>
+                互联网宗教信息服务许可证：浙（2022）0000120
+                增值电信业务经营许可证：浙B2-20150198 粤B2-20090191-18
+                工业和信息化部备案管理系统网站
+              </p>
+              <p>
+                <span style={{ marginRight: 14 + "px" }}>
+                  网易公司版权所有©1997-2025
+                </span>
+                杭州乐读科技有限公司运营：浙网文[2024]0900-042号{" "}
+                <img
+                  src="/images/police.png"
+                  alt="police"
+                  className={styles.policeIcon}
+                  style={{ marginRight: 14 + "px" }}
+                />{" "}
+                浙公网安备 33010802013307号 算法服务公示信息
+              </p>
             </div>
           </div>
         </div>
       </footer>
+
+      <div
+        className={`${styles.player} ${
+          isPlayerVisible ? styles.playerVisible : ""
+        }`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className={styles.playerBox}>
+          <a className={styles.playerBoxImg}></a>
+        </div>
+        <div className={styles.bg}></div>
+        <div className={styles.wrap}>
+          <div className={styles.btns}>
+            <a className={styles.btnsItemOne}></a>
+            {/* 播放 */}
+            <a className={styles.btnsItemTwo} onClick={handlePlayClick}></a>
+            <a className={styles.btnsItemThree}></a>
+          </div>
+          <div className={styles.head}>
+            <img
+              src="/images/default_album.jpg"
+              alt="head"
+              className={styles.headImg}
+            />
+          </div>
+          <div className={styles.play}>
+            <div className={styles.songName}>
+              <p className={styles.songNameItemOne}>{(currentSong&&isPlaying)?currentSong.name:'默认歌曲'}</p>
+              <p className={styles.songNameItemTwo}>{(currentSong&&isPlaying)?currentSong.singer:'默认歌手'}</p>
+              {currentSong?.name&&<a className={styles.songNameItemThree}></a>}
+            </div>
+            <Slider
+              value={progress}
+              onChange={handleSliderChange}
+              label={false}
+              className={styles.progressTd}
+            ></Slider>
+            <div className={styles.time}>
+              <div className={styles.timeLeft}>{formatTime(currentTime)}</div>
+              <div className={styles.timeCenter}>/</div>
+              <div className={styles.timeRight}>{formatTime(totalTime)}</div>
+            </div>
+          </div>
+          <div className={styles.oper}>
+            <div className={styles.operItemOne}></div>
+            <div className={styles.operItemTwo}></div>
+            <div className={styles.operItemThree}></div>
+          </div>
+          <div className={styles.ctrl}>
+            <a className={styles.ctrlItemOne}></a>
+            <div className={styles.ctrlItemTwo}></div>
+            <span className={styles.ctrlItemThree}>
+              <a className={styles.ctrlItemThreeItemOne}>0</a>
+            </span>
+            <a className={styles.ctrlItemFour}></a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

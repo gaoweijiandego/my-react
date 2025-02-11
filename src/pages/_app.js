@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import 'tdesign-react/dist/tdesign.css';
 import Layout from "@/components/Layout";
 import { useRouter } from 'next/router';
+import { MusicProvider } from '@/context/MusicContext';
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const MyApp = ({ Component, pageProps }) => {
   const is404Page = router.pathname === '/404';
 
   return (
-    <>
+    <MusicProvider>
       {!is404Page ? (
         <Layout>
           <Component {...pageProps} />
@@ -18,7 +19,7 @@ const MyApp = ({ Component, pageProps }) => {
       ) : (
         <Component {...pageProps} />
       )}
-    </>
+    </MusicProvider>
   );
 };
 

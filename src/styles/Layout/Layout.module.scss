@@ -177,7 +177,7 @@
         justify-content: center;
         align-items: center;
         .footerTopItem {
-          &:not(:first-child){
+          &:not(:first-child) {
             margin-left: 25px;
           }
           .footerTopItemImgOne {
@@ -190,7 +190,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-position: -5px -115px;
             }
           }
@@ -204,7 +204,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-position: -60px -170px;
             }
           }
@@ -217,7 +217,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-image: url("/images/xStudioHover.png");
             }
           }
@@ -231,7 +231,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-position: -115px -5px;
             }
           }
@@ -244,7 +244,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-image: url("/images/aiLogoHover.png");
             }
           }
@@ -257,7 +257,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-image: url("/images/cloudSongHover.png");
             }
           }
@@ -271,7 +271,7 @@
             height: 45px;
             margin: 0 auto;
             cursor: pointer;
-            &:hover{
+            &:hover {
               background-position: -60px -115px;
             }
           }
@@ -279,7 +279,7 @@
             display: inline-block;
             width: 100px;
             margin-top: 10px;
-            
+
             font-weight: 400;
             font-size: 12px;
             text-align: center;
@@ -290,27 +290,27 @@
       .footerBottomContainer {
         margin-top: 60px;
         text-align: center;
-        
+
         .footerLinks {
           margin-bottom: 4px;
-          
+
           a {
             color: #666;
             font-size: 12px;
             text-decoration: none;
-            
+
             &:hover {
               text-decoration: underline;
             }
           }
-          
+
           .line {
             color: #c2c2c2;
             margin: 0 10px;
             font-size: 12px;
           }
         }
-        
+
         .footerInfo {
           p {
             color: #666;
@@ -318,7 +318,7 @@
             line-height: 24px;
             margin: 0;
           }
-          
+
           .policeIcon {
             width: 14px;
             height: 14px;
@@ -328,6 +328,334 @@
         }
       }
     }
-    
+  }
+  .player {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    z-index: 19999;
+    pointer-events: auto;
+    bottom: -47px;
+    transition: bottom 0.3s ease-in-out;
+
+    &.playerVisible {
+      bottom: 0;
+    }
+    .playerBox {
+      background: url("/images/playbar.png") no-repeat 0 9999px;
+      position: absolute;
+      float: left;
+      top: -20px;
+      right: 0px;
+      width: 52px;
+      height: 67px;
+      background-position: 0 -380px;
+      .playerBoxImg {
+        background: url("/images/playbar.png") no-repeat 0 9999px;
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin: 6px 0 0 17px;
+        background-position: -80px -380px;
+      }
+    }
+    .bg {
+      background: url("/images/playbar.png") no-repeat 0 9999px;
+      height: 53px;
+      zoom: 1;
+
+      background-position: 0 0;
+      background-repeat: repeat-x;
+    }
+    .wrap {
+      position: absolute;
+      left: 50%;
+      top: 6px;
+      z-index: 15;
+      width: 1030px;
+      height: 47px;
+      margin: 0 auto;
+      color: #fff;
+      margin-left: -523.5px;
+      display: flex;
+      .btns {
+        width: 137px;
+        padding: 6px 0 0 0;
+        float: left;
+        .btnsItemOne {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          display: block;
+          float: left;
+          width: 28px;
+          height: 28px;
+          margin-right: 8px;
+          margin-top: 5px;
+          text-indent: -9999px;
+          background-position: 0 -130px;
+          cursor: pointer;
+          &:hover {
+            background-position: -30px -130px;
+          }
+        }
+        .btnsItemTwo {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          width: 36px;
+          height: 36px;
+          margin-top: 0;
+          background-position: 0 -204px;
+          display: block;
+          float: left;
+          margin-right: 8px;
+          text-indent: -9999px;
+          cursor: pointer;
+
+          &:hover {
+            background-position: -40px -204px;
+          }
+          &:active {
+            background-position: 0px -165px;
+          }
+        }
+        .btnsItemThree {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          display: block;
+          float: left;
+          width: 28px;
+          height: 28px;
+          margin-right: 8px;
+          margin-top: 5px;
+          text-indent: -9999px;
+          background-position: -80px -130px;
+          cursor: pointer;
+          &:hover {
+            background-position: -110px -130px;
+          }
+        }
+      }
+      .head {
+        position: relative;
+        margin: 6px 15px 0 0;
+        width: 34px;
+        height: 34px;
+        float: left;
+        .headImg {
+          width: 34px;
+          height: 34px;
+          cursor: pointer;
+        }
+      }
+      .play {
+        width: 581px;
+        height: 100%;
+        position: relative;
+        .songName {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .songNameItemOne {
+            max-width: 300px;
+            color: #e8e8e8;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+            cursor: pointer;
+            font-size: 12px;
+          }
+          .songNameItemTwo {
+            max-width: 220px;
+            margin-left: 15px;
+            color: #9b9b9b;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+            cursor: pointer;
+            font-size: 12px;
+          }
+          .songNameItemThree {
+            cursor: pointer;
+            background: url("/images/playbar.png") no-repeat 0 9999px;
+            float: left;
+            width: 14px;
+            height: 15px;
+            margin: 7px 0 0 13px;
+            background-position: -110px -103px;
+            cursor: pointer;
+            &:hover {
+              background-position: -130px -103px;
+            }
+          }
+        }
+        :global(.t-slider__container) {
+          width: 466px;
+          height: 9px;
+          position: absolute;
+          bottom: 24%;
+          left: 0;
+        }
+        .progressTd {
+          :global(.t-slider__track) {
+            background-color: rgb(199 12 12);
+          }
+          :global(.t-slider__button) {
+            width: 22px;
+            height: 24px;
+            background: url(/images/iconall.png) no-repeat 0 9999px;
+            background-position: 0 -250px;
+            z-index: 1999;
+            cursor: pointer;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+          }
+        }
+        .time {
+          position: absolute;
+          bottom: 24%;
+          right: 20px;
+          color: #797979;
+          text-shadow: 0 1px 0 #121212;
+          display: flex;
+          flex-direction: row;
+          font-size: 12px;
+
+          .timeLeft {
+            width: 49%;
+            color: #a1a1a1;
+            margin-right: 2px;
+          }
+          .timeCenter {
+            width: 1%;
+          }
+          .timeRight {
+            margin-left: 6px;
+            width: 49%;
+          }
+        }
+      }
+      .oper {
+        width: 87px;
+
+        float: left;
+        .operItemOne {
+          background: url("/images/oper1.png") no-repeat 0 0;
+          float: left;
+          width: 25px;
+          height: 25px;
+          margin: 11px 2px 0 0;
+          text-indent: -9999px;
+          cursor: pointer;
+          &:hover {
+            background-position-y: -25px;
+          }
+        }
+        .operItemTwo {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          background-position: -88px -163px;
+          float: left;
+          width: 25px;
+          height: 25px;
+          margin: 11px 2px 0 0;
+          text-indent: -9999px;
+          cursor: pointer;
+          &:hover {
+            background-position: -88px -189px;
+          }
+        }
+        .operItemThree {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          background-position: -114px -163px;
+          float: left;
+          width: 25px;
+          height: 25px;
+          margin: 11px 2px 0 0;
+          text-indent: -9999px;
+          cursor: pointer;
+          &:hover {
+            background-position: -114px -189px;
+          }
+        }
+      }
+      .ctrl {
+        float: left;
+        z-index: 10;
+        width: 170px;
+        padding-left: 13px;
+        position: relative;
+        .ctrlItemOne {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          float: left;
+          width: 25px;
+          height: 25px;
+          margin: 11px 2px 0 0;
+          text-indent: -9999px;
+          background-position: -2px -248px;
+          cursor: pointer;
+          &:hover {
+            background-position: -31px -248px;
+          }
+        }
+        .ctrlItemTwo {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          background-position: -3px -344px;
+          float: left;
+          width: 25px;
+          height: 25px;
+          margin: 11px 2px 0 0;
+          text-indent: -9999px;
+          cursor: pointer;
+          &:hover {
+            background-position: -33px -344px;
+          }
+        }
+        .ctrlItemThree {
+          float: left;
+          width: 59px;
+          height: 36px;
+          cursor: pointer;
+          .ctrlItemThreeItemOne {
+            background: url("/images/playbar.png") no-repeat 0 9999px;
+            display: block;
+            float: none;
+            width: 59px;
+            padding-left: 21px;
+            background-position: -42px -68px;
+            line-height: 27px;
+            text-align: center;
+            color: #666;
+            text-shadow: 0 1px 0 #080707;
+            text-indent: 0;
+            text-decoration: none;
+            height: 25px;
+            margin: 11px 2px 0 0;
+            font-size: 12px;
+            &:hover {
+              background-position: -42px -98px;
+              text-decoration: none;
+            }
+          }
+        }
+        .ctrlItemFour {
+          background: url("/images/audio-quality.png") no-repeat;
+          background-size: 45px 30px;
+          margin-left: 4px;
+          width: 41px;
+          margin-top: 9px;
+          float: left;
+          height: 25px;
+          margin: 11px 2px 0 0;
+          text-indent: -9999px;
+          cursor: pointer;
+          &:hover {
+            background: url("/images/audio-quality-hover.png") no-repeat;
+            background-size: 45px 30px;
+          }
+        }
+      }
+    }
   }
 }

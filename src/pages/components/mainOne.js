@@ -23,9 +23,7 @@ export default function MainOne({ data }) {
       acc[groupIndex].push(curr); // 将当前元素添加到对应组
       return acc;
     }, []);
-    console.log(groupedDiscData, "groupedDiscData");
     setDiscData(groupedDiscData);
-    console.log(discData, "discData");
   }, [data]);
   const PictureSrc = [
     {
