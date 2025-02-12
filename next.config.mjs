@@ -18,10 +18,7 @@ const nextConfig = {
     };
     return config;
   },
-  output: 'standalone',
-  experimental: {
-    appDir: false
-  }
+  output: 'standalone'
 };
 
 export default nextConfig;
