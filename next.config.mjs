@@ -8,9 +8,13 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': './src'
+      '@': require('path').resolve(__dirname, 'src')
     };
     return config;
+  },
+  output: 'standalone',
+  experimental: {
+    appDir: false
   }
 };
 

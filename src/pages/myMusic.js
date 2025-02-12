@@ -1,4 +1,4 @@
-import styles from "../styles/MyMusic/myMusic.module.scss";
+import styles from "../styles/myMusic/myMusic.module.scss";
 export default function MyMusic() {
 
   return <div className={styles.myMusic}>

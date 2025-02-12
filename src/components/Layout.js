@@ -1,4 +1,4 @@
-import styles from "@/styles/Layout/Layout.module.scss";
+import styles from "@/styles/layout/Layout.module.scss";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Input, Button, Slider } from "tdesign-react/lib/";
