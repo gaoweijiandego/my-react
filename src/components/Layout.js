@@ -26,6 +26,8 @@ const Layout = ({ children }) => {
   const handleMouseLeave = () => {
     if (!isPlayerBoxVisible) {
       setIsPlayerVisible(false);
+      setVolumeBar(false)
+      
     }
   };
   const [isPlayerBoxVisible, setIsPlayerBoxVisible] = useState(false);
@@ -38,7 +40,7 @@ const Layout = ({ children }) => {
     } else {
       const windowHeight = window.innerHeight;
       const mouseY = window.event.clientY;
-      setIsPlayerVisible(mouseY > windowHeight - 150);
+      setIsPlayerVisible(mouseY > windowHeight - 120);
     }
   };
   const {
@@ -98,9 +100,9 @@ const Layout = ({ children }) => {
       if (!isPlayerBoxVisible) {
         const windowHeight = window.innerHeight;
         const mouseY = event.clientY;
-        setIsPlayerVisible(mouseY > windowHeight - 150);
+        setIsPlayerVisible(mouseY > windowHeight - 120);
       }
-    }, 300);
+    }, 2000);
 
     if (!isPlayerBoxVisible) {
       document.addEventListener("mousemove", handleMouseMove);

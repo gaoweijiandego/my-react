@@ -2,53 +2,55 @@ import styles from "@/styles/index.module.scss";
 import { Swiper } from "tdesign-react/lib/";
 import { useEffect, useState, useRef } from "react";
 import MainOne from "./components/mainOne";
+import { getStaticData } from '@/data/staticData';
+
 const { SwiperItem } = Swiper;
+
 export async function getStaticProps() {
-  try {
-    // 并行请求多个接口
-    const [singer, data] = await Promise.all([
-      fetch("http://localhost:3000/api/singer"),
-      fetch("http://localhost:3000/api/home"),
-    ]);
-    console.log(singer, data, "data");
-    // 检查响应是否成功
-    if (!singer.ok || !data.ok) {
-      throw new Error("Network response was not ok");
-    }
+  // 没有服务器弃用！
+  // try {
+  //   // 并行请求多个接口
+  //   const [singer, data] = await Promise.all([
+  //     // 本地api
+  //     fetch("http://localhost:3000/api/singer"),
+  //     fetch("http://localhost:3000/api/home"),
+  //     // 外部api
+  //     // fetch("/api/singer"),
+  //     // fetch("/api/home"),
+  //   ]);
+  //   console.log(singer, data, "data");
+  //   // 检查响应是否成功
+  //   if (!singer.ok || !data.ok) {
+  //     throw new Error("Network response was not ok");
+  //   }
 
-    // 解析 JSON 数据
-    const singerData = await singer.json();
-    const dataData = await data.json();
+  //   // 解析 JSON 数据
+  //   const singerData = await singer.json();
+  //   const dataData = await data.json();
 
-    return {
-      props: {
-        singers: singerData, // 将歌手数据传递给页面组件
-        data: dataData, // 将专辑数据传递给页面组件
-      },
-    };
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return {
-      props: {
-        singers: [], // 如果请求失败，返回空数组
-        data: [],
-      },
-    };
-  }
-
-  // let data;
-  // // 模拟获取数据
-  // await fetch("http://localhost:3000/api/home")
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     data = res;
-  //   });
-
-  // return {
-  //   props: {
-  //     data: data, // 将数据传递给页面组件
-  //   },
-  // };
+  //   return {
+  //     props: {
+  //       singers: singerData, // 将歌手数据传递给页面组件
+  //       data: dataData, // 将专辑数据传递给页面组件
+  //     },
+  //   };
+  // } catch (error) {
+  //   console.error("Fetch error:", error);
+  //   return {
+  //     props: {
+  //       singers: [], // 如果请求失败，返回空数组
+  //       data: [],
+  //     },
+  //   };
+  // }
+  const { singers, data } = getStaticData();
+  console.log(singers, data, "data");
+  return {
+    props: {
+      singers,
+      data,
+    },
+  };
 }
 
 export default function Home({ singers, data }) {
@@ -60,6 +62,7 @@ export default function Home({ singers, data }) {
 
   // 初始化时设置第一张图片的颜色
   useEffect(() => {
+    console.log(data, "data");
     if (data && data.length > 0) {
       getImageColors(data[0].data).then((colors) => {
         setGradientColors(colors);
@@ -79,7 +82,7 @@ export default function Home({ singers, data }) {
       }
 
       const img = new Image();
-      img.src = `data:image/jpeg;base64,${imageData}`;
+      img.src = imageData;
 
       img.onload = () => {
         const canvas = canvasRef.current;
@@ -186,7 +189,7 @@ export default function Home({ singers, data }) {
           {data.map((item, index) => (
             <SwiperItem key={index} className={styles.swiperItem}>
               <img
-                src={`data:image/jpeg;base64,${item.data}`}
+                src={item.data}
                 alt={`swiper-${index}`}
                 className={styles.swiperItemImg}
               />
