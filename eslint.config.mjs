@@ -9,6 +9,18 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals"),
+  {
+    settings: {
+      "import/resolver": {
+        alias: {
+          map: [["@", "./"]],
+          extensions: [".js", ".jsx", ".ts", ".tsx", ".scss"]
+        }
+      }
+    }
+  }
+];
 
 export default eslintConfig;
