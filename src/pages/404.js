@@ -1,4 +1,4 @@
-import styles from "@/styles/404/404.module.scss";
+import styles from "@/styles/404.module.scss";
 import { Button } from "tdesign-react/lib/";
 import { useRouter } from "next/router";
 const Custom404 = () => {

@@ -1,4 +1,4 @@
-import styles from "@/styles/mainOne/mainOne.module.scss";
+import styles from "@/styles/mainOne.module.scss";
 import { Button, Swiper } from "tdesign-react/lib/";
 import { Icon } from "tdesign-icons-react";
 import { useEffect, useState } from "react";
