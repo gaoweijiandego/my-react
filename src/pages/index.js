@@ -1,4 +1,4 @@
-import styles from "../styles/index.module.scss";
+import styles from "@/styles/index.module.scss";
 import { Swiper } from "tdesign-react/lib/";
 import { useEffect, useState, useRef } from "react";
 import MainOne from "./components/mainOne";
