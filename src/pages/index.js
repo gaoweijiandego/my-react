@@ -69,31 +69,71 @@ export default function Home({ singers, data }) {
 
   const getImageColors = (imageData) => {
     return new Promise((resolve) => {
+      // 检查是否在浏览器环境
+      if (typeof window === 'undefined') {
+        resolve({
+          color1: "hsla(180, 50%, 80%, 0.6)", // 默认颜色
+          color2: "hsla(190, 50%, 80%, 0.5)"
+        });
+        return;
+      }
+
       const img = new Image();
       img.src = `data:image/jpeg;base64,${imageData}`;
 
       img.onload = () => {
         const canvas = canvasRef.current;
+        if (!canvas) {
+          resolve({
+            color1: "hsla(180, 50%, 80%, 0.6)",
+            color2: "hsla(190, 50%, 80%, 0.5)"
+          });
+          return;
+        }
+
         const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve({
+            color1: "hsla(180, 50%, 80%, 0.6)",
+            color2: "hsla(190, 50%, 80%, 0.5)"
+          });
+          return;
+        }
 
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
 
-        const leftData = ctx.getImageData(0, 0, 1, img.height).data;
-        const rightData = ctx.getImageData(
-          img.width - 1,
-          0,
-          1,
-          img.height
-        ).data;
+        try {
+          const leftData = ctx.getImageData(0, 0, 1, img.height).data;
+          const rightData = ctx.getImageData(img.width - 1, 0, 1, img.height).data;
 
-        const leftColor = getAverageColor(leftData);
-        const rightColor = getAverageColor(rightData);
+          const leftColor = getAverageColor(leftData);
+          const rightColor = getAverageColor(rightData);
 
+          resolve({
+            color1: `rgba(${leftColor.r}, ${leftColor.g}, ${leftColor.b}, 0.6)`,
+            color2: `rgba(${rightColor.r}, ${rightColor.g}, ${rightColor.b}, 0.5)`,
+          });
+        } catch (error) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('获取图片颜色失败:', error);
+          }
+          resolve({
+            color1: "hsla(180, 50%, 80%, 0.6)",
+            color2: "hsla(190, 50%, 80%, 0.5)"
+          });
+        }
+      };
+
+      // 添加错误处理
+      img.onerror = () => {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('图片加载失败');
+        }
         resolve({
-          color1: `rgba(${leftColor.r}, ${leftColor.g}, ${leftColor.b}, 0.6)`,
-          color2: `rgba(${rightColor.r}, ${rightColor.g}, ${rightColor.b}, 0.5)`,
+          color1: "hsla(180, 50%, 80%, 0.6)",
+          color2: "hsla(190, 50%, 80%, 0.5)"
         });
       };
     });
@@ -136,7 +176,6 @@ export default function Home({ singers, data }) {
             if (data && data[swiper]) {
               const currentImage = data[swiper];
               getImageColors(currentImage.data).then((colors) => {
-                console.log(colors);
                 setGradientColors(colors);
               });
             }

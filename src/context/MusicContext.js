@@ -27,6 +27,7 @@ export const MusicProvider = ({ children }) => {
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
+  const [volume, setVolume] = useState(20);
 
   // 监听音频事件
   useEffect(() => {
@@ -67,7 +68,7 @@ export const MusicProvider = ({ children }) => {
   const play = useCallback(async (songUrl) => {
     if (!audioRef.current) return;
     const audio = audioRef.current;
-
+    
     try {
       // 设置新的音频源
       if (songUrl !== audio.src) {
@@ -98,11 +99,16 @@ export const MusicProvider = ({ children }) => {
 
   // 切换播放/暂停
   const togglePlay = useCallback(() => {
+    console.log( "togglePlay");
+    console.log(audioRef.current, "audioRef.current");
+    console.log(currentSong, "currentSong");
     if (!audioRef.current || !currentSong) return;
 
     if (isPlaying) {
+      console.log("pause");
       pause();
     } else {
+      console.log("else");
       // 如果当前有音频源但未播放，直接使用 play 方法
       if (audioRef.current.src) {
         // 保存当前时间
@@ -111,6 +117,7 @@ export const MusicProvider = ({ children }) => {
         audioRef.current
           .play()
           .then(() => {
+            console.log("play");
             // 确保播放位置不变
             audioRef.current.currentTime = currentPosition;
             setIsPlaying(true);
@@ -121,6 +128,7 @@ export const MusicProvider = ({ children }) => {
           });
       } else {
         // 如果没有音频源，重新设置
+        console.log("play-else");
         play(currentSong.url);
       }
     }
@@ -140,17 +148,41 @@ export const MusicProvider = ({ children }) => {
     [totalTime]
   );
 
+  // 添加新方法：播放新歌曲
+  const playNewSong = useCallback((songInfo) => {
+    setCurrentSong(songInfo);
+    if (!audioRef.current) return;
+    
+    const audio = audioRef.current;
+    audio.src = songInfo.url;
+    audio.currentTime = 0;
+    setCurrentTime(0);
+    setProgress(0);
+    
+    audio.play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch((error) => {
+        console.error("播放失败:", error);
+        setIsPlaying(false);
+      });
+  }, []);
+
   const value = {
     currentTime,
     totalTime,
     progress,
     isPlaying,
     currentSong,
+    volume,
+    setVolume,
     setCurrentSong,
     play,
     pause,
     togglePlay,
     seekTo,
+    playNewSong,
   };
 
   return (

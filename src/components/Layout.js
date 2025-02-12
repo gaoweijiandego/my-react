@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Input, Button, Slider } from "tdesign-react/lib/";
 import { Icon } from "tdesign-icons-react";
-import { useMusicPlayer } from '@/context/MusicContext';
+import { useMusicPlayer } from "@/context/MusicContext";
 
 const Layout = ({ children }) => {
   const router = useRouter();
@@ -19,29 +19,48 @@ const Layout = ({ children }) => {
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsPlayerVisible(true);
+    if (!isPlayerBoxVisible) {
+      setIsPlayerVisible(true);
+    }
   };
-
   const handleMouseLeave = () => {
-    setIsPlayerVisible(false);
+    if (!isPlayerBoxVisible) {
+      setIsPlayerVisible(false);
+    }
   };
-  
+  const [isPlayerBoxVisible, setIsPlayerBoxVisible] = useState(false);
+  const handlePlayerBoxClick = () => {
+    const newState = !isPlayerBoxVisible;
+    setIsPlayerBoxVisible(newState);
+
+    if (newState) {
+      setIsPlayerVisible(true);
+    } else {
+      const windowHeight = window.innerHeight;
+      const mouseY = window.event.clientY;
+      setIsPlayerVisible(mouseY > windowHeight - 150);
+    }
+  };
   const {
     currentTime,
     totalTime,
     progress,
     currentSong,
+    volume,
+    setVolume,
     isPlaying,
-    setCurrentSong,
+    playNewSong,
     togglePlay,
-    seekTo
+    seekTo,
   } = useMusicPlayer();
 
   // 添加格式化时间的辅助函数
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   useEffect(() => {
@@ -76,17 +95,21 @@ const Layout = ({ children }) => {
     };
 
     const handleMouseMove = throttle((event) => {
-      const windowHeight = window.innerHeight;
-      const mouseY = event.clientY;
-      setIsPlayerVisible(mouseY > windowHeight - 150);
-    }, 300); // 每100ms最多执行一次
+      if (!isPlayerBoxVisible) {
+        const windowHeight = window.innerHeight;
+        const mouseY = event.clientY;
+        setIsPlayerVisible(mouseY > windowHeight - 150);
+      }
+    }, 300);
 
-    document.addEventListener("mousemove", handleMouseMove);
+    if (!isPlayerBoxVisible) {
+      document.addEventListener("mousemove", handleMouseMove);
+    }
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isPlayerBoxVisible]);
 
   // 处理进度条改变
   const handleSliderChange = (newValue) => {
@@ -96,12 +119,31 @@ const Layout = ({ children }) => {
 
   // 播放音乐示例
   const handlePlayClick = () => {
-    // 使用一个测试音频URL
-    const songUrl = "/music/yzgf.mp3";
-    setCurrentSong({url:songUrl,name:'远走高飞',singer:'高志远',album:'歌单'});
-    togglePlay();
-  };
+    if (isPlaying) {
+      togglePlay();
+      return;
+    }
 
+    if (currentSong?.url === "/music/yzgf.mp3") {
+      togglePlay();
+    } else {
+      playNewSong({
+        url: "/music/yzgf.mp3",
+        name: "远走高飞",
+        singer: "高志远",
+        album: "歌单",
+      });
+    }
+  };
+  const [volumeBar, setVolumeBar] = useState(false);
+  
+  // 修改音量控制点击处理函数
+  const hanldeVolumeBar = (e) => {
+    // 确保点击的是音量图标而不是滑块
+    if (e.target.className === styles.ctrlItemOne) {
+      setVolumeBar(!volumeBar);
+    }
+  };
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
@@ -320,14 +362,26 @@ const Layout = ({ children }) => {
         onMouseLeave={handleMouseLeave}
       >
         <div className={styles.playerBox}>
-          <a className={styles.playerBoxImg}></a>
+          <a
+            className={
+              isPlayerBoxVisible
+                ? styles.playerBoxImgActive
+                : styles.playerBoxImg
+            }
+            onClick={handlePlayerBoxClick}
+          ></a>
         </div>
         <div className={styles.bg}></div>
         <div className={styles.wrap}>
           <div className={styles.btns}>
             <a className={styles.btnsItemOne}></a>
             {/* 播放 */}
-            <a className={styles.btnsItemTwo} onClick={handlePlayClick}></a>
+            <a
+              className={
+                isPlaying ? styles.btnsItemTwoActive : styles.btnsItemTwo
+              }
+              onClick={handlePlayClick}
+            ></a>
             <a className={styles.btnsItemThree}></a>
           </div>
           <div className={styles.head}>
@@ -339,9 +393,13 @@ const Layout = ({ children }) => {
           </div>
           <div className={styles.play}>
             <div className={styles.songName}>
-              <p className={styles.songNameItemOne}>{(currentSong&&isPlaying)?currentSong.name:'默认歌曲'}</p>
-              <p className={styles.songNameItemTwo}>{(currentSong&&isPlaying)?currentSong.singer:'默认歌手'}</p>
-              {currentSong?.name&&<a className={styles.songNameItemThree}></a>}
+              <p className={styles.songNameItemOne}>
+                {currentSong ? currentSong.name : ""}
+              </p>
+              <p className={styles.songNameItemTwo}>
+                {currentSong ? currentSong.singer : ""}
+              </p>
+              {currentSong && <a className={styles.songNameItemThree}></a>}
             </div>
             <Slider
               value={progress}
@@ -361,7 +419,20 @@ const Layout = ({ children }) => {
             <div className={styles.operItemThree}></div>
           </div>
           <div className={styles.ctrl}>
-            <a className={styles.ctrlItemOne}></a>
+            {/* 音量 */}
+            <a className={styles.ctrlItemOne} onClick={hanldeVolumeBar}>
+              {volumeBar && (
+                <div className={styles.volumebarContainer}>
+                  <Slider
+                    value={volume}
+                    onChange={(value) => setVolume(value)}
+                    label={false}
+                    className={styles.volumebar}
+                    layout="vertical"
+                  ></Slider>
+                </div>
+              )}
+            </a>
             <div className={styles.ctrlItemTwo}></div>
             <span className={styles.ctrlItemThree}>
               <a className={styles.ctrlItemThreeItemOne}>0</a>

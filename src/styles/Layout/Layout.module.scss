@@ -158,6 +158,7 @@
   }
   .main {
     min-height: 80vh;
+    background-color: #f5f5f5;
   }
   .footer {
     border-top: 1px solid #d3d3d3;
@@ -359,6 +360,22 @@
         height: 18px;
         margin: 6px 0 0 17px;
         background-position: -80px -380px;
+        cursor: pointer;
+        &:hover {
+          background-position: -80px -400px;
+        }
+      }
+      .playerBoxImgActive {
+        background: url("/images/playbar.png") no-repeat 0 9999px;
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin: 6px 0 0 17px;
+        background-position: -100px -380px;
+        cursor: pointer;
+        &:hover {
+          background-position: -100px -400px;
+        }
       }
     }
     .bg {
@@ -414,8 +431,20 @@
           &:hover {
             background-position: -40px -204px;
           }
-          &:active {
-            background-position: 0px -165px;
+        }
+        .btnsItemTwoActive {
+          background: url("/images/playbar.png") no-repeat 0 9999px;
+          width: 36px;
+          height: 36px;
+          margin-top: 0;
+          display: block;
+          float: left;
+          margin-right: 8px;
+          text-indent: -9999px;
+          cursor: pointer;
+          background-position: 0px -165px;
+          &:hover {
+            background-position: -40px -165px;
           }
         }
         .btnsItemThree {
@@ -464,6 +493,9 @@
             word-wrap: normal;
             cursor: pointer;
             font-size: 12px;
+            &:hover {
+              text-decoration: underline;
+            }
           }
           .songNameItemTwo {
             max-width: 220px;
@@ -475,6 +507,9 @@
             word-wrap: normal;
             cursor: pointer;
             font-size: 12px;
+            &:hover {
+              text-decoration: underline;
+            }
           }
           .songNameItemThree {
             cursor: pointer;
@@ -507,10 +542,16 @@
             background: url(/images/iconall.png) no-repeat 0 9999px;
             background-position: 0 -250px;
             z-index: 1999;
-            cursor: pointer;
+            
             border: none;
             border-radius: 0;
             box-shadow: none;
+            &:hover {
+              transform: scale(1.05);
+            }
+          }
+          :global(.t-slider__rail) {
+            background-color: #000;
           }
         }
         .time {
@@ -586,6 +627,7 @@
         width: 170px;
         padding-left: 13px;
         position: relative;
+
         .ctrlItemOne {
           background: url("/images/playbar.png") no-repeat 0 9999px;
           float: left;
@@ -595,8 +637,46 @@
           text-indent: -9999px;
           background-position: -2px -248px;
           cursor: pointer;
+          position: relative;
           &:hover {
             background-position: -31px -248px;
+          }
+          .volumebarContainer {
+            width: 32px;
+            height: 113px;
+            position: absolute;
+            bottom: 34px;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            :global(.t-slider__container) {
+              width: 4px;
+              height: 90px;
+              margin-top: 8px;
+            }
+            .volumebar {
+              :global(.t-slider__track) {
+                background-color: rgb(199 12 12);
+              }
+              :global(.t-slider__button) {
+                width: 18px;
+                height: 20px;
+                background: url(/images/iconall.png) no-repeat;
+                background-position: -40px -250px;
+                z-index: 1999;
+                cursor: pointer;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                &:hover {
+                  transform: scale(1.05);
+                }
+              }
+              :global(.t-slider__rail) {
+                background-color: #000;
+              }
+            }
           }
         }
         .ctrlItemTwo {

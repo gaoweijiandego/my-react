@@ -1,3 +1,12 @@
+import styles from "../styles/MyMusic/myMusic.module.scss";
 export default function MyMusic() {
-  return <div>我的音乐</div>;
+
+  return <div className={styles.myMusic}>
+    <div className={styles.myMusicBackground}>
+     <div className={styles.myMusicBackgroundInner}>
+      <div className={styles.myMusicBackgroundInnertop}></div>
+      <div className={styles.myMusicBackgroundInnerbottom}></div>
+     </div>
+    </div>
+  </div>;
 }

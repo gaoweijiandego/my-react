@@ -1,0 +1,35 @@
+.myMusic {
+  width: 980px;
+  min-height: 700px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+  border-width: 0 1px;
+  .myMusicBackground {
+    background: url("/images/mymusic.png") no-repeat 9999px;
+    width: 807px;
+    height: 368px;
+    margin: 0 auto 0;
+    padding-top: 104px;
+    background-position: 0 104px;
+    .myMusicBackgroundInner {
+      .myMusicBackgroundInnertop {
+        height: 100px;
+        text-indent: -9999px;
+      }
+      .myMusicBackgroundInnerbottom {
+        background: url("/images/mymusic.png") no-repeat 9999px;
+        display: block;
+        width: 167px;
+        height: 45px;
+        margin: 102px 0 0 482px;
+        background-position: 0 9999px;
+        text-indent: -9999px;
+        cursor: pointer;
+        &:hover {
+          background-position: 0 -278px;
+        }
+      }
+    }
+  }
+}
